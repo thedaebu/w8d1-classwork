@@ -1,29 +1,14 @@
-<h1>Create a Sub</h1>
-
-<form action="<%= user_subs_url(@user) %>" method="POST">
-
-    <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
-
-    <label>Title:
-    <input type="text" name="sub[title]" value="<%= @sub.title%>">
-    </label>
-
-    <label>Description:
-    <input type="text" name="sub[description]" value="<%= @sub.description%>">
-    </label>
-
-    <input type="submit" value="Create Sub">
-
-</form>
-
+<p><a href="<%= new_user_sub_url(@user) %>">Create a Sub</a></p>
 
 <h1><%=@user.username%>'s Subs</h1>
+
+
 
 <% @user.subs.each do |sub| %>
     <ul>
         <li>
             <p><a href="<%=sub_url(sub)%>"><%=sub.title%></a></p>
-            <p><a href="<%=edit_sub_url(sub)%>">Edit Sub</a></p>
+            <p><a href="<%=edit_user_sub_url(sub)%>">Edit Sub</a></p>
             <form action="<%= sub_url(sub) %>" method="POST">
                 <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
                 <input type="hidden" name="_method" value="DELETE">

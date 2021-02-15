@@ -1,5 +1,5 @@
 class Sub < ApplicationRecord
-    validates :title, :description, :model_id, presence: true
+    validates :title, :description, :moderator_id, presence: true
 
 
     belongs_to :moderator,
