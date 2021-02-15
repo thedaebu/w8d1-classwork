@@ -8,10 +8,6 @@ class SubsController < ApplicationController
         render :index
     end
 
-    def new
-        render :new
-    end
-
     def create
         @sub = Sub.new(sub_params)
         @sub.moderator_id = params[:moderator_id]

@@ -16,3 +16,35 @@
 
 </form>
 
+
+<h1><%=@user.username%>'s Subs</h1>
+
+<% @user.subs.each do |sub| %>
+    <ul>
+        <li>
+            <p><a href="<%=sub_url(sub)%>"><%=sub.title%></a></p>
+            <p><a href="<%=edit_sub_url(sub)%>">Edit Sub</a></p>
+            <form action="<%= sub_url(sub) %>" method="POST">
+                <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="submit" value="Delete Sub">
+            </form>
+        </li>
+    </ul>
+<% end %>
+
+<h1><%=@user.username%>'s Posts</h1>
+
+<% @user.posts.each do |post| %>
+    <ul>
+        <li>
+            <p><a href="<%=post_url(post)%>"><%=post.title%></a></p>
+            <p><a href="<%=edit_post_url(post)%>">Edit post</a></p>
+            <form action="<%= post_url(post) %>" method="POST">
+                <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="postmit" value="Delete post">
+            </form>
+        </li>
+    </ul>
+<% end %>
