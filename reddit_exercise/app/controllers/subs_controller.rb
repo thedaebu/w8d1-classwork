@@ -3,6 +3,11 @@ class SubsController < ApplicationController
     before_action :ensure_sub_moderator, only: [:edit, :update]
     before_action :ensure_logged_in
 
+    def index
+        @subs = Sub.all
+        render :index
+    end
+
     def new
         render :new
     end
