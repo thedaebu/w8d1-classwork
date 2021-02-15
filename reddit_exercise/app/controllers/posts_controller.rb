@@ -34,7 +34,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find_by(id: params[:id])
-    if @post && @post.author == current_user &&@post.delete
+    if @post && @post.author == current_user && @post.delete
       redirect_to subs_url
     else
       flash[:errors] = @post.errors.full_messages

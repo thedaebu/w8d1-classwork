@@ -10,7 +10,7 @@ class SubsController < ApplicationController
 
     def create
         @sub = Sub.new(sub_params)
-        @sub.moderator_id = params[:moderator_id]
+        @sub.moderator_id = current_user.id
 
         if @sub.save
         else
