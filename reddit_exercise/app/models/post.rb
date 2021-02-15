@@ -5,7 +5,11 @@ class Post < ApplicationRecord
         foreign_key: :author_id,
         class_name: :User
 
-    belongs_to :sub,
-        foreign_key: :sub_id,
-        class_name: :Sub
-end
+    has_many :post_subs,
+        foreign_key: :post_id,
+        class_name: :PostSub
+
+    has_many :subs,
+        through: :post_subs,
+        source: :sub
+    end
