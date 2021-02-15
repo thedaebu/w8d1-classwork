@@ -1,5 +1,8 @@
 class SubsController < ApplicationController
 
+    before_action :ensure_sub_moderator, only: [:edit, :update]
+    before_action :ensure_logged_in
+
     def new
         render :new
     end
@@ -16,13 +19,13 @@ class SubsController < ApplicationController
     end
 
     def edit
-        @sub = Sub.find_by[id: params[:id]]
+        @sub = Sub.find_by(id: params[:id])
         render :edit
     end
 
     def update
         @sub = Sub.find_by[id: params[:id]]
-        if current_user == @sub.moderator && @sub && @sub.update(sub_params)
+        if @sub && current_user == @sub.moderator && @sub.update(sub_params)
             redirect_to subs_url
         else
             flash.now[:errors] = @sub.errors.full_messages
@@ -35,4 +38,11 @@ class SubsController < ApplicationController
         params.require(:sub).permit(:title, :description)
     end
 
+    def ensure_sub_moderator
+        @sub = Sub.find_by(id: params[:id])
+        if current_user != @sub.moderator
+            flash[:errors] = ["Must be a moderator to edit this sub"]
+            redirect_to sub_url
+        end
+    end
 end
